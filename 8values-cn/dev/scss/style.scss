@@ -133,6 +133,7 @@ $COLOR-PRO:#9c27b0;
 }
 .mod-selection{
   margin-top:rem-calc(96);
+  margin-bottom:rem-calc(300);
 }
 
 .mod-menu{
@@ -153,6 +154,7 @@ $COLOR-PRO:#9c27b0;
   transform: translateX(-100%) translateZ(0);
   width:rem-calc(340);
   background-color: #2b323e;
+
 }
 .fl{
   float:left;
@@ -168,8 +170,16 @@ $COLOR-PRO:#9c27b0;
   padding:rem-calc(48) 0;
   height:100%;
   box-sizing: border-box;
-  overflow:hidden;
+  margin:0 auto;
 }
 
 .mod-menu-n{
+  width:rem-calc(100);
+  height:rem-calc(100);
+  background-color: #ffffff;
+  color:#000000;
+  line-height: rem-calc(100);
+  text-align: center;
+  margin:rem-calc(50) 0;
 }
+

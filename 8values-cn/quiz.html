@@ -109,7 +109,7 @@ var econ, dipl, govt, scty; // User's scores
 econ = dipl = govt = scty = 0;
 var qn = 0; // Question number
 var prev_answer = null;
-
+var ansArray = new Array(questions.length);
 init_question();
 
 for (var i = 0; i < questions.length; i++) {
@@ -120,21 +120,74 @@ for (var i = 0; i < questions.length; i++) {
 }
 function init_question() {
     document.getElementById("question-text").innerHTML = questions[qn].question;
-    document.getElementById("question-number").innerHTML =  (qn + 1) + " / " + (questions.length);
+    var num = qn+1;
+    var tar = document.getElementById("8vCons"+num);
+    document.getElementById("question-number").innerHTML = num + " / " + (questions.length);
+    tar.style.backgroundColor="#0099ff";
+    tar.style.color="#ffffff";
+
 }
 
-function next_question(mult) {
-    econ += mult*questions[qn].effect.econ;
-    dipl += mult*questions[qn].effect.dipl;
-    govt += mult*questions[qn].effect.govt;
-    scty += mult*questions[qn].effect.scty;
-    qn++;
-    prev_answer = mult;
-    if (qn < questions.length) {
-        init_question();
+function modAnswer(mult){
+    var prevAns = ansArray[qn];
+
+    switch(mult){
+        case 1.0:
+            ansArray[qn]=1;
+            break;
+        case 0.5:
+            ansArray[qn]=2;
+            break;
+        case 0.0:
+            ansArray[qn]=3;
+            break;
+        case -0.5:
+            ansArray[qn]=4;
+            break;
+        case -1.0:
+            ansArray[qn]=5;
+            break;
     }
-    else {
-        results();
+
+}
+
+
+
+function next_question(mult) {
+    if(ansArray[qn]!==undefined){
+        modAnswer(mult);
+    }
+    else{
+        switch(mult){
+            case 1.0:
+                ansArray[qn]=1;
+                break;
+            case 0.5:
+                ansArray[qn]=2;
+                break;
+            case 0.0:
+                ansArray[qn]=3;
+                break;
+            case -0.5:
+                ansArray[qn]=4;
+                break;
+            case -1.0:
+                ansArray[qn]=5;
+                break;
+        }
+
+        econ += mult*questions[qn].effect.econ;
+        dipl += mult*questions[qn].effect.dipl;
+        govt += mult*questions[qn].effect.govt;
+        scty += mult*questions[qn].effect.scty;
+        qn++;
+        prev_answer = mult;
+        if (qn < questions.length) {
+            init_question();
+        }
+        else {
+            results();
+        }
     }
 }
 function prev_question() {
@@ -169,6 +222,8 @@ function showMenu(obj) {
     con.style.transform='translateX(10.4rem)';
     obj.style.transform='rotate(90deg)';
 }
+
+
 </script>
 </body>
 </html>
