@@ -1,0 +1,69 @@
+@import  "_rem-calc";
+
+$mediaArray: "only screen",
+"only screen and (min-width: 360px) and (max-width: 399px)",
+"only screen and (min-width: 400px) and (max-width: 479px)",
+"only screen and (min-width: 480px) and (max-width: 719px)",
+"only screen and (min-width: 720px)";
+
+$rem-base: 36px;
+$ratioFor320: 720/320;
+$ratioFor360: 720/360;
+$ratioFor400: 720/400;
+$ratioFor480: 720/480;
+$ratioFor720: 720/720;
+$htmSizeArray:  floor($rem-base/$ratioFor320),
+floor($rem-base/$ratioFor360),
+floor($rem-base/$ratioFor400),
+floor($rem-base/$ratioFor480),
+floor($rem-base/$ratioFor720);
+//===== end variable
+
+// set responsive
+@for $mediaIndex from 1 to length($mediaArray) + 1 {
+  $media: nth($mediaArray, $mediaIndex);
+  $htmlFz: nth($htmSizeArray, $mediaIndex);
+  @media #{$media}
+  {
+    html{
+      font-size: $htmlFz;
+    }
+  }
+}
+html{
+  min-width: 320px;
+  overflow-y: scroll;
+  margin: 0 auto !important;
+  padding: 0;
+  background-color: #5a5359;
+  height: 100%;
+}
+body{
+  width:100%;
+  height:100%;
+}
+img{
+  display: block;
+  border:0 none;
+}
+.clearfix:after{
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  zoom: 1;
+}
+*{
+  padding:0;
+  margin:0;
+}
+ul,li{
+  list-style: none outside none;;
+}
+a{
+  text-decoration: none;
+  color:#000000;
+}
